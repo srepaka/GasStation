@@ -1,0 +1,30 @@
+<h1>Payouts</h1>
+
+<table>
+	<tr>
+		<th>Description</th>
+		<th>Amount</th>
+		<th colspan="2"></th>
+	</tr>
+
+	
+	<% @daily_report.payouts.each do |po| %>
+		<tr>
+			<td><%= po.description %></td>
+			<td><%= po.amount %></td>
+			<td><%= link_to 'Edit', edit_daily_report_payout_path(po.daily_report, po) %></td>
+			<td><%= link_to 'Delete', daily_report_payout_path(po.daily_report, po), 
+				method: :delete,
+				data: { confirm: 'Are you sure?' } %></td>
+		</tr>
+	<% end %>
+</table>
+
+<h2>Add a payout:</h2>
+
+<% @payout = @daily_report.payouts.build %>
+<%= render 'form' %>
+
+<p>
+	<%= link_to 'Back', daily_reports_path %>	
+</p>

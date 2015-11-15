@@ -21,12 +21,13 @@
 		<th>Payouts</th>
 		<th>Cash Expected</th>
 		<th>Cash Counted</th>
-		<th>Differences</th>
+		<th>Difference</th>
 		<th>Notes</th>
-		<th colspan="2"></th>
+		<th colspan="3"></th>
 	<tr>
 
 	<% @DailyReports.each do |dailyreport| %>
+		<% @total_payouts = dailyreport.payouts.sum(:amount) %>
 		<tr>
 			<td><%= dailyreport.date =%></td>
 			<td><%= dailyreport.grocery =%></td>
@@ -42,12 +43,13 @@
 			<td><%= (dailyreport.fuel + dailyreport.gift_cards - dailyreport.credit - dailyreport.debit) - dailyreport.commission=%></td>
 			<td>0.00</td>
 			<td colspan="2"></td>
-			<td>0.00 </td>
-			<td><%= dailyreport.cash =%></td>
+			<td><%= @total_payouts =%></td>
+			<td><%= dailyreport.cash - @total_payouts =%></td>
 			<td><%= dailyreport.cash_counted =%></td>
-			<td><%= dailyreport.cash - dailyreport.cash_counted =%></td>
+			<td><%= dailyreport.cash_counted - dailyreport.cash =%></td>
 			<td><%= dailyreport.notes =%></td>
 			<td><%= link_to 'Edit', edit_daily_report_path(dailyreport) %></td>
+			<td><%= link_to 'Payouts', daily_report_payouts_path(dailyreport) %></td>
 			<td><%= link_to 'Delete', daily_report_path(dailyreport),
 				method: :delete,
 				data: { confirm: 'Are you sure?' } %></td>

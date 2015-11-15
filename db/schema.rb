@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151115085438) do
+ActiveRecord::Schema.define(version: 20151115202953) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,4 +32,15 @@ ActiveRecord::Schema.define(version: 20151115085438) do
     t.datetime "updated_at",                                           null: false
   end
 
+  create_table "payouts", force: :cascade do |t|
+    t.text     "description"
+    t.decimal  "amount",          precision: 5, scale: 2, null: false
+    t.integer  "daily_report_id"
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+  end
+
+  add_index "payouts", ["daily_report_id"], name: "index_payouts_on_daily_report_id", using: :btree
+
+  add_foreign_key "payouts", "daily_reports"
 end

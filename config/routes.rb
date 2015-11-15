@@ -16,7 +16,9 @@ Rails.application.routes.draw do
 
   root 'daily_reports#index'
 
-  resources :daily_reports
+  resources :daily_reports do
+	resources :payouts
+  end
 
   # Example resource route with options:
   #   resources :products do
