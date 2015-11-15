@@ -14,6 +14,10 @@ Rails.application.routes.draw do
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 
+  root 'daily_reports#index'
+
+  resources :daily_reports
+
   # Example resource route with options:
   #   resources :products do
   #     member do

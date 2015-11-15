@@ -1,0 +1,42 @@
+<%= form_for @daily_report do |f| %>
+
+	<% if @daily_report.errors.any? %>
+                <div id="error_explanation">
+                        <h2>
+                                <%= pluralize(@daily_report.errors.count, "error") %> prohibited
+                                this store from being saved:
+                        </h2>
+                        <ul>
+                                <% @daily_store.errors.full_messages.each do |msg| %>
+                                        <li><%= msg %></li>
+                                <% end %>
+                        </ul>
+                </div>
+        <% end %>
+
+        <p>
+                <%= f.label :date %><br>
+                <%= f.date_field :date %>
+        </p>
+
+        <p>
+                <%= f.label :grocery %><br>
+                <%= f.number_field :grocery, :class => 'text_field', :step => 'any' %>
+        </p>
+	
+	<p>
+                <%= f.label :fuel %><br>
+                <%= f.number_field :fuel, :class => 'text_field', :step => 'any' %>
+        </p>
+
+	</p>
+                <%= f.label :gift_cards %><br>
+                <%= f.number_field :gift_cards, :class => 'text_field', :step => 'any' %>
+        </p>
+
+        <p>
+                <%= f.submit %>
+        </p>
+
+<% end %>
+

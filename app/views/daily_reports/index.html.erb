@@ -1,0 +1,26 @@
+<h1>List of daily reports</h1>
+
+<%= link_to 'New Report', new_daily_report_path %>
+
+<table>
+	<tr>
+		<th>Report Date</th>
+		<th>Grocery</th>
+		<th>Fuel</th>
+		<th>Gift Cards</th>
+		<th colspan="2"></th>
+	<tr>
+
+	<% @DailyReports.each do |dailyreport| %>
+		<tr>
+			<td><%= dailyreport.date =%>
+			<td><%= dailyreport.grocery =%>
+			<td><%= dailyreport.fuel =%>
+			<td><%= dailyreport.gift_cards =%>
+			<td><%= link_to 'Edit', edit_daily_report_path(dailyreport) %></td>
+			<td><%= link_to 'Delete', daily_report_path(dailyreport),
+				method: :delete,
+				data: { confirm: 'Are you sure?' } %></td>
+		</tr>
+	<% end %>
+</table>
