@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20151115202953) do
     t.text     "description"
     t.decimal  "amount",          precision: 5, scale: 2, null: false
     t.integer  "daily_report_id"
+    t.integer  "category",                                null: false
     t.datetime "created_at",                              null: false
     t.datetime "updated_at",                              null: false
   end

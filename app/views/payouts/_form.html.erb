@@ -19,6 +19,11 @@
 	</p>
 
 	<p>
+		<%= f.label :category %><br>
+		<%= f.select :category, options_for_select(Payout.categories.keys.to_a) %>
+	</p>
+
+	<p>
 		<%= f.label :amount %><br>
 		<%= f.number_field :amount, :class => 'text_field', :step => 'any' %>
 	</p>
