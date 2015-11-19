@@ -40,6 +40,6 @@ class DailyReportsController < ApplicationController
 
 	private
 		def daily_report_params
-			params.require(:daily_report).permit(:date, :grocery, :fuel, :gift_cards)
+			params.require(:daily_report).permit(:date, :grocery, :fuel, :gift_cards, :credit, :debit, :cash, :commission, :actual_debit, :cash_counted, :notes)
 		end	
 end

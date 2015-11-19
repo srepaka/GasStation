@@ -4,10 +4,10 @@
                 <div id="error_explanation">
                         <h2>
                                 <%= pluralize(@daily_report.errors.count, "error") %> prohibited
-                                this store from being saved:
+                                this report from being saved:
                         </h2>
                         <ul>
-                                <% @daily_store.errors.full_messages.each do |msg| %>
+                                <% @daily_report.errors.full_messages.each do |msg| %>
                                         <li><%= msg %></li>
                                 <% end %>
                         </ul>
@@ -16,7 +16,7 @@
 
         <p>
                 <%= f.label :date %><br>
-                <%= f.date_field :date %>
+                <%= f.date_select :date %>
         </p>
 
         <p>
@@ -32,6 +32,41 @@
 	</p>
                 <%= f.label :gift_cards %><br>
                 <%= f.number_field :gift_cards, :class => 'text_field', :step => 'any' %>
+        </p>
+
+	<p>
+                <%= f.label :credit %><br>
+                <%= f.number_field :credit, :class => 'text_field', :step => 'any' %>
+        </p>
+
+	<p>
+                <%= f.label :debit %><br>
+                <%= f.number_field :debit, :class => 'text_field', :step => 'any' %>
+        </p>
+
+	<p>
+                <%= f.label :cash %><br>
+                <%= f.number_field :cash, :class => 'text_field', :step => 'any' %>
+        </p>
+
+	<p>
+                <%= f.label :cash_counted %><br>
+                <%= f.number_field :cash_counted, :class => 'text_field', :step => 'any' %>
+        </p>
+
+	<p>
+                <%= f.label :commission %><br>
+                <%= f.number_field :commission, :class => 'text_field', :step => 'any' %>
+        </p>
+
+	<p>
+                <%= f.label :actual_debit %><br>
+                <%= f.number_field :actual_debit, :class => 'text_field', :step => 'any' %>
+        </p>
+
+	<p>
+                <%= f.label :notes %><br>
+                <%= f.text_field :notes %>
         </p>
 
         <p>

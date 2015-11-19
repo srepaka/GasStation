@@ -11,18 +11,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151115085438) do
+ActiveRecord::Schema.define(version: 20151115202953) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "daily_reports", force: :cascade do |t|
-    t.date     "date",                                             null: false
-    t.decimal  "grocery",    precision: 7, scale: 2,               null: false
-    t.decimal  "fuel",       precision: 7, scale: 2,               null: false
-    t.decimal  "gift_cards", precision: 7, scale: 2, default: 0.0, null: false
-    t.datetime "created_at",                                       null: false
-    t.datetime "updated_at",                                       null: false
+    t.date     "date",                                                 null: false
+    t.decimal  "grocery",      precision: 7, scale: 2,                 null: false
+    t.decimal  "fuel",         precision: 7, scale: 2,                 null: false
+    t.decimal  "gift_cards",   precision: 7, scale: 2, default: 0.0,   null: false
+    t.decimal  "credit",       precision: 7, scale: 2,                 null: false
+    t.decimal  "debit",        precision: 7, scale: 2,                 null: false
+    t.decimal  "cash",         precision: 7, scale: 2,                 null: false
+    t.decimal  "commission",   precision: 7, scale: 2, default: 225.0, null: false
+    t.decimal  "actual_debit", precision: 7, scale: 2, default: 0.0,   null: false
+    t.decimal  "cash_counted", precision: 7, scale: 2,                 null: false
+    t.text     "notes"
+    t.datetime "created_at",                                           null: false
+    t.datetime "updated_at",                                           null: false
   end
 
+  create_table "payouts", force: :cascade do |t|
+    t.text     "description"
+    t.decimal  "amount",          precision: 5, scale: 2, null: false
+    t.integer  "daily_report_id"
+    t.integer  "category",                                null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+  end
+
+  add_index "payouts", ["daily_report_id"], name: "index_payouts_on_daily_report_id", using: :btree
+
+  add_foreign_key "payouts", "daily_reports"
 end
