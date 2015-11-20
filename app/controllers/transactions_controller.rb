@@ -1,6 +1,9 @@
 class TransactionsController < ApplicationController
 	def index
-		@transactions = Transaction.all
+		@credit_entry_type = EntryType.find_by entry_type: 'Credit'
+		@debit_entry_type = EntryType.find_by entry_type: 'Debit'
+		@credit_transactions = Transaction.where("entry_type_id = ?", @credit_entry_type)
+		@debit_transactions = Transaction.where("entry_type_id = ?", @debit_entry_type)
 	end
 
 	def new
