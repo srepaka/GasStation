@@ -22,6 +22,14 @@ Rails.application.routes.draw do
 	resources :payouts
   end
 
+  resources :transactions
+
+  namespace :api, defaults: {format: 'json'} do
+	namespace :v1 do
+		resources :entry_types 
+	end
+  end
+
   # Example resource route with options:
   #   resources :products do
   #     member do

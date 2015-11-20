@@ -1,0 +1,53 @@
+<script type="text/javascript">
+</script>
+
+<%= form_for @transaction do |f| %>
+	
+	<% if @transaction.errors.any? %>
+		<div id="error_explanation">
+			<h2>
+				<%= pluralize(@transaction.errors.count, "error") %> prohibited this 
+				transaction from being saved:
+			</h2>
+			<ul>
+				<% @transaction.errors.full_messages.each do |msg| %>
+					<li><%= msg %></li>
+				<% end %>
+			</ul>		
+		</div>
+	<% end %>
+
+	<p>
+		<%= f.label :accounting_date %><br>
+		<%= f.date_select :accounting_date %>
+	</p>
+
+	<p>
+		<%= f.label :transaction_date %><br>
+		<%= f.date_select :transaction_date %>
+	</p>
+
+	<p>
+		<%= f.label :entry_type_id %><br>
+		<%= f.collection_select :entry_type_id, EntryType.all, :id, :entry_type %>	
+	</p>
+
+	<p>
+		<%= f.label :description %><br>
+		<%= f.text_field :description %>
+	</p>
+
+	<p>
+		<%= f.label :entry_category_id %><br>
+		<%= f.collection_select :entry_category_id, EntryCategory.all, :id, :category %>
+	</p>
+
+	<p>
+		<%= f.label :amount %><br>
+		<%= f.number_field :amount, :class => 'text_field', :step => 'any' %>
+	</p>
+	
+	<p>
+		<%= f.submit %>
+	</p>
+<% end %>

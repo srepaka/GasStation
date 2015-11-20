@@ -1,0 +1,22 @@
+<h1>List of transactions</h1>
+
+<%= link_to 'New Transaction', new_transaction_path %>
+
+<table>
+	<tr>
+		<th>Accounting Date</th>
+		<th>Transaction Date</th>
+		<th>Description</th>
+		<th>Category</th>
+		<th>Amount</th>
+	</tr>
+
+	<% @transactions.each do |transaction| %>
+		<tr>
+			<td><%= transaction.accounting_date =%></td>
+			<td><%= transaction.transaction_date =%></td>
+			<td><%= transaction.description =%></td>
+			<td><%= transaction.entry_category.category =%></td>
+			<td><%= transaction.amount =%></td>
+		</tr>
+	<% end %>
