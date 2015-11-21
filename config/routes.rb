@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   resources :daily_reports do
-	resources :payouts
+	resources :payouts, :deposits
   end
 
   resources :transactions

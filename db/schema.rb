@@ -64,16 +64,19 @@ ActiveRecord::Schema.define(version: 20151119071829) do
     t.string   "description",                                null: false
     t.integer  "entry_type_id",                              null: false
     t.integer  "entry_category_id",                          null: false
+    t.integer  "daily_report_id"
     t.decimal  "amount",            precision: 10, scale: 2, null: false
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
   end
 
+  add_index "transactions", ["daily_report_id"], name: "index_transactions_on_daily_report_id", using: :btree
   add_index "transactions", ["entry_category_id"], name: "index_transactions_on_entry_category_id", using: :btree
   add_index "transactions", ["entry_type_id"], name: "index_transactions_on_entry_type_id", using: :btree
 
   add_foreign_key "entry_categories", "entry_types"
   add_foreign_key "payouts", "daily_reports"
+  add_foreign_key "transactions", "daily_reports"
   add_foreign_key "transactions", "entry_categories"
   add_foreign_key "transactions", "entry_types"
 end
