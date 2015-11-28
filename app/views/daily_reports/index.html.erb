@@ -46,7 +46,7 @@
 			<td><%= @total_payouts =%></td>
 			<td><%= dailyreport.cash - @total_payouts =%></td>
 			<td><%= dailyreport.cash_counted =%></td>
-			<td><%= dailyreport.cash_counted - dailyreport.cash =%></td>
+			<td><%= dailyreport.cash_counted - (dailyreport.cash - @total_payouts) =%></td>
 			<td><%= dailyreport.notes =%></td>
 			<td><%= link_to 'Edit', edit_daily_report_path(dailyreport) %></td>
 			<td><%= link_to 'Payouts', daily_report_payouts_path(dailyreport) %></td>
