@@ -1,9 +1,16 @@
 class TransactionsController < ApplicationController
+
 	def index
+
+		start_date = 1.week.ago
 		@credit_entry_type = EntryType.find_by entry_type: 'Credit'
 		@debit_entry_type = EntryType.find_by entry_type: 'Debit'
-		@credit_transactions = Transaction.where("entry_type_id = ?", @credit_entry_type)
-		@debit_transactions = Transaction.where("entry_type_id = ?", @debit_entry_type)
+		
+		@credit_transactions = Transaction.where("entry_type_id = ? AND transaction_date >= ?", @credit_entry_type, start_date).order('transaction_date ASC')
+		@debit_transactions = Transaction.where("entry_type_id = ? AND transaction_date >= ?", @debit_entry_type, start_date).order('transaction_date ASC') 
+		
+		@old_credit_transactions = Transaction.where("entry_type_id = ? AND transaction_date < ?", @credit_entry_type, start_date)
+		@old_debit_transactions = Transaction.where("entry_type_id = ? AND transaction_date < ?", @debit_entry_type, start_date)
 	end
 
 	def new

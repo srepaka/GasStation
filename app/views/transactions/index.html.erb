@@ -1,10 +1,12 @@
+<%= stylesheet_link_tag "transactions" %>
+
 <h1>List of transactions</h1>
 
 <%= link_to 'New Transaction', new_transaction_path %>
 
-<h2>Credits</h2>
+<table class="transactions">
+	<tr><td><h2>Credits</h2></td></tr>
 
-<table>
 	<tr>
 		<th>Accounting Date</th>
 		<th>Transaction Date</th>
@@ -14,13 +16,21 @@
 		<th colspan="3"></th>
 	</tr>
 
+	<tr>
+		<td>N/A</td>
+		<td>N/A</td>
+		<td>Balance Fwd</td>
+		<td>Balance Fwd</td>
+		<td class="amount"><%= number_to_currency(@old_credit_transactions.sum(:amount)) %></td>
+	</tr>
+
 	<% @credit_transactions.each do |transaction| %>
 		<tr>
 			<td><%= transaction.accounting_date =%></td>
 			<td><%= transaction.transaction_date =%></td>
 			<td><%= transaction.description =%></td>
 			<td><%= transaction.entry_category.category =%></td>
-			<td><%= transaction.amount =%></td>
+			<td class="amount"><%= number_to_currency(transaction.amount) =%></td>
 			<td><%= link_to 'Edit', edit_transaction_path(transaction) %></td>
 			<td><%= link_to 'Delete', transaction_path(transaction),
 				method: :delete,
@@ -31,13 +41,11 @@
 	<tr>
 		<td colspan="3"></th>
 		<td><b>Total Credits</b></th>
-		<td><b><%= @credit_transactions.sum(:amount) %></b></th>
+		<td class="amount"><b><%= number_to_currency(@credit_transactions.sum(:amount) + @old_credit_transactions.sum(:amount)) %></b></th>
 	</tr>
-</table>
 
-<h2>Debits</h2>
+	<tr><td><h2>Debits</h2></td></tr>
 
-<table>
         <tr>
                 <th>Accounting Date</th>
                 <th>Transaction Date</th>
@@ -47,13 +55,21 @@
                 <th colspan="3"></th>
         </tr>
 
+	<tr>
+		<td>N/A</td>
+		<td>N/A</td>
+		<td>Balance Fwd</td>
+		<td>Balance Fwd</td>
+		<td class="amount"><%= number_to_currency(@old_debit_transactions.sum(:amount)) %></td>
+	</tr>
+
         <% @debit_transactions.each do |transaction| %>
                 <tr>
                         <td><%= transaction.accounting_date =%></td>
                         <td><%= transaction.transaction_date =%></td>
                         <td><%= transaction.description =%></td>
                         <td><%= transaction.entry_category.category =%></td>
-                        <td><%= transaction.amount =%></td>
+                        <td class="amount"><%= number_to_currency(transaction.amount) =%></td>
                         <td><%= link_to 'Edit', edit_transaction_path(transaction) %></td>
                         <td><%= link_to 'Delete', transaction_path(transaction),
                                 method: :delete,
@@ -64,9 +80,15 @@
 	<tr>
 		<td colspan="3"></th>
 		<td><b>Total Debits</b></th>
-		<td><b><%= @debit_transactions.sum(:amount) %></b></th>
+		<td class="amount"><b><%= number_to_currency(@debit_transactions.sum(:amount) + @old_debit_transactions.sum(:amount)) %></b></th>
+	</tr>
+
+	<tr>
+		<td colspan="3"></td>
+		<td><b>Net Balance</b></td>
+		<td class="amount"><b><%= number_to_currency((@credit_transactions.sum(:amount) + @old_credit_transactions.sum(:amount)) -
+			   		      (@debit_transactions.sum(:amount) + @old_debit_transactions.sum(:amount))) %></b></td>
 	</tr>
 </table>
-
 
 <%= link_to 'Back to home', root_path %>
