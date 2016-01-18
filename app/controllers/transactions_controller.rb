@@ -1,16 +1,29 @@
 class TransactionsController < ApplicationController
 
 	def index
+		
+		@from_date_is_null = true
+		@to_date_is_null = true
 
-		start_date = 1.week.ago
-		@credit_entry_type = EntryType.find_by entry_type: 'Credit'
-		@debit_entry_type = EntryType.find_by entry_type: 'Debit'
+		if (params[:from_date])
+			@from_date_is_null = false
+			from_date = params[:from_date]
+		else
+			from_date = 2.weeks.ago
+		end
+
+		if (params[:to_date])
+			@to_date_is_null = false
+			to_date = params[:to_date]
+		else
+			to_date = Date.today
+		end
+
+		@credit_transactions = Transaction.FilterCredit().FilterByTDate(from_date, to_date).order('transaction_date ASC')
+		@debit_transactions = Transaction.FilterDebit().FilterByTDate(from_date, to_date).order('transaction_date ASC') 
 		
-		@credit_transactions = Transaction.where("entry_type_id = ? AND transaction_date >= ?", @credit_entry_type, start_date).order('transaction_date ASC')
-		@debit_transactions = Transaction.where("entry_type_id = ? AND transaction_date >= ?", @debit_entry_type, start_date).order('transaction_date ASC') 
-		
-		@old_credit_transactions = Transaction.where("entry_type_id = ? AND transaction_date < ?", @credit_entry_type, start_date)
-		@old_debit_transactions = Transaction.where("entry_type_id = ? AND transaction_date < ?", @debit_entry_type, start_date)
+		@old_credit_transactions = Transaction.FilterCredit().where("transaction_date < ?", from_date)
+		@old_debit_transactions = Transaction.FilterDebit().where("transaction_date < ?", from_date)
 	end
 
 	def new
