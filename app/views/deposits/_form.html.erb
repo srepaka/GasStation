@@ -1,0 +1,39 @@
+<%= form_for @deposit, :as => :deposit, :url => daily_report_deposits_path(@daily_report, @deposit) do |f| %>
+	<% if @deposit.errors.any? %>
+                <div id="error_explanation">
+                        <h2>
+                                <%= pluralize(@deposit.errors.count, "error") %> prohibited this 
+                                deposit being saved:
+                        </h2>
+                        <ul>
+                                <% @deposit.errors.full_messages.each do |msg| %>
+                                        <li><%= msg %></li>
+                                <% end %>
+                        </ul>
+                </div>
+        <% end %>
+
+        <p>
+                <%= f.label "Deposit Date" %><br>
+                <%= f.date_select :transaction_date %>
+        </p>
+
+        <p>
+                <%= f.label :description %><br>
+                <%= f.text_field :description %>
+        </p>
+
+        <p>
+                <%= f.label :amount %><br>
+                <%= f.number_field :amount, :class => 'text_field', :step => 'any' %>
+        </p>
+
+	<%= f.hidden_field :entry_type_id, :value => 1 %>
+	<%= f.hidden_field :entry_category_id, :value => 4 %>
+	<%= f.hidden_field :accounting_date, :value => @daily_report.date %>	
+
+        <p>
+                <%= f.submit %>
+        </p>
+<% end %>
+

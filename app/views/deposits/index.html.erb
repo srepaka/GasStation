@@ -1,0 +1,31 @@
+<h1>Deposits</h1>
+
+<table>
+	<tr>
+		<th>Deposit Date</th>
+		<th>Description</th>
+		<th>Amount</th>
+		<th colspan="2"></th>
+	</tr>
+	
+	<% @daily_report.transactions.each do |deposit| %>
+		<tr>
+			<td><%= deposit.transaction_date %></td>
+			<td><%= deposit.description %></td>
+			<td><%= deposit.amount %></td>
+			<td><%= link_to 'Edit', edit_daily_report_deposit_path(deposit.daily_report, deposit) %></td>
+			<td><%= link_to 'Delete', daily_report_deposit_path(deposit.daily_report, deposit),
+				method: :delete,
+				data: { confirm: 'Are you sure?' } %></td>
+		</tr>
+	<% end %>
+</table>
+
+<h2>Add a deposit:</h2>
+
+<% @deposit = @daily_report.transactions.build %>
+<%= render 'form' %>
+
+<p>
+		<%= link_to 'Back', daily_reports_path %>
+</p>		

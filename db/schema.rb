@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151115202953) do
+ActiveRecord::Schema.define(version: 20151119071829) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,10 +32,25 @@ ActiveRecord::Schema.define(version: 20151115202953) do
     t.datetime "updated_at",                                           null: false
   end
 
+  create_table "entry_categories", force: :cascade do |t|
+    t.string   "category",      null: false
+    t.integer  "entry_type_id", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "entry_categories", ["entry_type_id"], name: "index_entry_categories_on_entry_type_id", using: :btree
+
+  create_table "entry_types", force: :cascade do |t|
+    t.string   "entry_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "payouts", force: :cascade do |t|
-    t.text     "description"
+    t.text     "description",                             null: false
     t.decimal  "amount",          precision: 5, scale: 2, null: false
-    t.integer  "daily_report_id"
+    t.integer  "daily_report_id",                         null: false
     t.integer  "category",                                null: false
     t.datetime "created_at",                              null: false
     t.datetime "updated_at",                              null: false
@@ -43,5 +58,25 @@ ActiveRecord::Schema.define(version: 20151115202953) do
 
   add_index "payouts", ["daily_report_id"], name: "index_payouts_on_daily_report_id", using: :btree
 
+  create_table "transactions", force: :cascade do |t|
+    t.date     "accounting_date",                            null: false
+    t.date     "transaction_date",                           null: false
+    t.string   "description",                                null: false
+    t.integer  "entry_type_id",                              null: false
+    t.integer  "entry_category_id",                          null: false
+    t.integer  "daily_report_id"
+    t.decimal  "amount",            precision: 10, scale: 2, null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+  end
+
+  add_index "transactions", ["daily_report_id"], name: "index_transactions_on_daily_report_id", using: :btree
+  add_index "transactions", ["entry_category_id"], name: "index_transactions_on_entry_category_id", using: :btree
+  add_index "transactions", ["entry_type_id"], name: "index_transactions_on_entry_type_id", using: :btree
+
+  add_foreign_key "entry_categories", "entry_types"
   add_foreign_key "payouts", "daily_reports"
+  add_foreign_key "transactions", "daily_reports"
+  add_foreign_key "transactions", "entry_categories"
+  add_foreign_key "transactions", "entry_types"
 end

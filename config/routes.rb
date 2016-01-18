@@ -19,7 +19,15 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   resources :daily_reports do
-	resources :payouts
+	resources :payouts, :deposits
+  end
+
+  resources :transactions
+
+  namespace :api, defaults: {format: 'json'} do
+	namespace :v1 do
+		resources :entry_types 
+	end
   end
 
   # Example resource route with options:
