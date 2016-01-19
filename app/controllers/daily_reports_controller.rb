@@ -1,6 +1,24 @@
 class DailyReportsController < ApplicationController
 	def index
-		@DailyReports = DailyReport.all
+
+		@from_date_is_null = true
+		@to_date_is_null = true
+
+		if (params[:from_date])
+			@from_date_is_null = false
+			from_date = params[:from_date]
+		else
+			from_date = 2.weeks.ago
+		end
+		
+		if (params[:to_date])
+			@to_date_is_null = false
+			to_date = params[:to_date]
+		else
+			to_date = Date.today
+		end
+
+		@DailyReports = DailyReport.FilterByDate(from_date, to_date).order('date ASC')
 	end
 
 	def new
