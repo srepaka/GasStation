@@ -15,7 +15,7 @@
 
         <p>
                 <%= f.label "Deposit Date" %><br>
-                <%= f.date_select :transaction_date %>
+                <%= f.date_select :transaction_date, default: Date.today %>
         </p>
 
         <p>
