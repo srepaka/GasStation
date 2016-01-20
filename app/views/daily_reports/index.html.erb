@@ -27,6 +27,10 @@
 	</p>
 <% end %>
 
+<p>
+	Average sales($)/day for this period: <b><u><%= number_to_currency(@DailyReports.average(:grocery)) %></u></b>
+</p>
+
 <table id="reports_table" border="1">
 	<tr>
 		<th>Date</th>
