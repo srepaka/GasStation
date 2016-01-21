@@ -82,8 +82,8 @@ class TransactionsController < ApplicationController
 		@credit_transactions = Transaction.FilterCredit.FilterByADate(from_date, to_date)
 		@debit_transactions = Transaction.FilterDebit.FilterByADate(from_date, to_date)
 
-		@credit_transaction_groups = @credit_transactions.joins(:entry_category).select("category, amount").group(:category).sum(:amount)
-		@debit_transaction_groups = @debit_transactions.joins(:entry_category).select("category, amount").group(:category).sum(:amount)
+		@credit_transaction_groups = @credit_transactions.joins(:entry_category).select("category, amount").group(:category).order('category ASC').sum(:amount)
+		@debit_transaction_groups = @debit_transactions.joins(:entry_category).select("category, amount").group(:category).order('category ASC').sum(:amount)
 
 		@sum_credits = @credit_transactions.sum(:amount)
 		@sum_debits = @debit_transactions.sum(:amount)
