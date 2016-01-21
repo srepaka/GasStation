@@ -13,7 +13,7 @@
 		<tr>
 			<td><%= payout.description %></td>
 			<td><%= payout.category %></td>
-			<td><%= payout.amount %></td>
+			<td><%= number_to_currency(payout.amount) %></td>
 			<td><%= link_to 'Edit', edit_daily_report_payout_path(payout.daily_report, payout) %></td>
 			<td><%= link_to 'Delete', daily_report_payout_path(payout.daily_report, payout), 
 				method: :delete,

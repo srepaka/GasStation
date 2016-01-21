@@ -12,7 +12,7 @@
 		<tr>
 			<td><%= deposit.transaction_date %></td>
 			<td><%= deposit.description %></td>
-			<td><%= deposit.amount %></td>
+			<td><%= number_to_currency(deposit.amount) %></td>
 			<td><%= link_to 'Edit', edit_daily_report_deposit_path(deposit.daily_report, deposit) %></td>
 			<td><%= link_to 'Delete', daily_report_deposit_path(deposit.daily_report, deposit),
 				method: :delete,
