@@ -22,7 +22,9 @@ Rails.application.routes.draw do
 	resources :payouts, :deposits
   end
 
-  resources :transactions
+  resources :transactions do
+	get 'report', on: :collection
+  end
 
   namespace :api, defaults: {format: 'json'} do
 	namespace :v1 do

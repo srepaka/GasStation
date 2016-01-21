@@ -8,16 +8,20 @@ class Transaction < ActiveRecord::Base
 
   def self.FilterDebit()
 	@debit_entry_type = EntryType.find_by entry_type: 'Debit'
-	where("entry_type_id = ?", @debit_entry_type)
+	where("\"transactions\".entry_type_id = ?", @debit_entry_type)
   end
 
   def self.FilterCredit()
 	@debit_entry_type = EntryType.find_by entry_type: 'Credit'
-	where("entry_type_id = ?", @debit_entry_type)
+	where("\"transactions\".entry_type_id = ?", @debit_entry_type)
   end
 
   def self.FilterByTDate(from_date, to_date)
 	where("transaction_date >= ? AND transaction_date <= ?", from_date, to_date)
+  end
+
+  def self.FilterByADate(from_date, to_date)
+	where("accounting_date >= ? AND accounting_date <= ?", from_date, to_date)
   end
 
   def self.FilterByDescription(description)

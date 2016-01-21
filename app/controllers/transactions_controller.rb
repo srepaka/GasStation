@@ -1,7 +1,6 @@
 class TransactionsController < ApplicationController
 
 	def index
-		
 		@from_date_is_null = true
 		@to_date_is_null = true
 
@@ -59,6 +58,35 @@ class TransactionsController < ApplicationController
 		@transaction.destroy
 
 		redirect_to transactions_path
+	end
+
+	def report
+		@from_date_is_null = true
+		@to_date_is_null = true
+
+		if (params[:from_date])
+			@from_date_is_null = false
+			from_date = params[:from_date]
+		else
+			from_date = 1.month.ago
+		end
+
+		
+		if (params[:to_date])
+			@to_date_is_null = false
+			to_date = params[:to_date]
+		else
+			to_date = Date.today
+		end
+
+		@credit_transactions = Transaction.FilterCredit.FilterByADate(from_date, to_date)
+		@debit_transactions = Transaction.FilterDebit.FilterByADate(from_date, to_date)
+
+		@credit_transaction_groups = @credit_transactions.joins(:entry_category).select("category, amount").group(:category).sum(:amount)
+		@debit_transaction_groups = @debit_transactions.joins(:entry_category).select("category, amount").group(:category).sum(:amount)
+
+		@sum_credits = @credit_transactions.sum(:amount)
+		@sum_debits = @debit_transactions.sum(:amount)
 	end
 
 	private
