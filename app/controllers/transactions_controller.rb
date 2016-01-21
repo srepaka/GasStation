@@ -3,26 +3,45 @@ class TransactionsController < ApplicationController
 	def index
 		@from_date_is_null = true
 		@to_date_is_null = true
-
-		if (params[:from_date])
+		@description_is_null = true
+		@category_is_null = true
+		
+		if (params[:from_date] && params[:from_date] != "")
 			@from_date_is_null = false
 			from_date = params[:from_date]
 		else
 			from_date = 2.weeks.ago
 		end
 
-		if (params[:to_date])
+		if (params[:to_date] && params[:to_date] != "")
 			@to_date_is_null = false
 			to_date = params[:to_date]
 		else
 			to_date = Date.today
 		end
 
-		@credit_transactions = Transaction.FilterCredit().FilterByTDate(from_date, to_date).order('transaction_date ASC')
-		@debit_transactions = Transaction.FilterDebit().FilterByTDate(from_date, to_date).order('transaction_date ASC') 
+		if (params[:description] && params[:description] != "*")
+			@description_is_null = false
+			description = params[:description]
+		else
+			description = nil
+		end
+
+		if (params[:category] && params[:category] != "*")
+			@category_is_null = false
+			category = params[:category]
+		else
+			category = nil
+		end
+
+		@credit_transactions_filtered = Transaction.FilterCredit().FilterByDescription(description).FilterByCategory(category)
+		@debit_transactions_filtered = Transaction.FilterDebit().FilterByDescription(description).FilterByCategory(category)
+
+		@credit_transactions = @credit_transactions_filtered.FilterByTDate(from_date, to_date).order('transaction_date ASC')
+		@debit_transactions = @debit_transactions_filtered.FilterByTDate(from_date, to_date).order('transaction_date ASC') 
 		
-		@old_credit_transactions = Transaction.FilterCredit().where("transaction_date < ?", from_date)
-		@old_debit_transactions = Transaction.FilterDebit().where("transaction_date < ?", from_date)
+		@old_credit_transactions = @credit_transactions_filtered.where("transaction_date < ?", from_date)
+		@old_debit_transactions = @debit_transactions_filtered.where("transaction_date < ?", from_date)
 	end
 
 	def new

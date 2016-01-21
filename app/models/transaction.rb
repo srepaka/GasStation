@@ -26,9 +26,17 @@ class Transaction < ActiveRecord::Base
 
   def self.FilterByDescription(description)
 	if description
-		where(["description LIKE ?", "%#{description}%"])
+		where(["LOWER(description) ILIKE ?", "%#{description}%"])
+	else
+		all		
+	end
+  end
+
+  def self.FilterByCategory(category)
+	if category
+		joins(:entry_category).where(["LOWER(category) ILIKE ?", "%#{category}%"])
 	else
 		all
 	end
-  end
+  end	
 end

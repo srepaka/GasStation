@@ -23,6 +23,23 @@
 			<%= date_field_tag :to_date, params[:to_date] %>
 		<% end %>
 
+
+		<%= label_tag "Description: " %>
+
+		<% if (@description_is_null == true || params[:description] == "") %>
+			<%= text_field_tag :description, "*" %>
+		<% else %>
+			<%= text_field_tag :description, params[:description] %>
+		<% end %>
+		
+		<%= label_tag "Category: " %>
+		
+		<% if (@category_is_null == true || params[:category] == "") %>
+			<%= text_field_tag :category, "*" %>
+		<% else %>
+			<%= text_field_tag :category, params[:category] %>
+		<% end %>
+
 		<%= submit_tag "Filter", :name => nil %>
 	</p>
 <% end %>
