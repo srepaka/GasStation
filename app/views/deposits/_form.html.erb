@@ -28,8 +28,8 @@
                 <%= f.number_field :amount, :class => 'text_field', :step => 'any' %>
         </p>
 
-	<%= f.hidden_field :entry_type_id, :value => 1 %>
-	<%= f.hidden_field :entry_category_id, :value => 4 %>
+	<%= f.hidden_field :entry_type_id, :value => @entry_category.entry_type_id %>
+	<%= f.hidden_field :entry_category_id, :value => @entry_category.id %>
 	<%= f.hidden_field :accounting_date, :value => @daily_report.date %>	
 
         <p>
