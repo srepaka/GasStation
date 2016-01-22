@@ -58,7 +58,7 @@
 
 	<% @DailyReports.each do |dailyreport| %>
 		<% @total_payouts = dailyreport.payouts.sum(:amount) %>
-		<tr>
+		<tr align="right">
 			<td><%= dailyreport.date %></td>
 			<td></td>
 			<td><%= number_to_currency(dailyreport.grocery) %></td>
