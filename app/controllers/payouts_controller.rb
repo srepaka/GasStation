@@ -35,6 +35,6 @@ class PayoutsController < ApplicationController
 
 	private
 		def payout_params
-			params.require(:payout).permit(:description, :amount, :category)
+			params.require(:payout).permit(:description, :amount, :payout_category_id)
 		end
 end

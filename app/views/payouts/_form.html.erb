@@ -20,7 +20,7 @@
 
 	<p>
 		<%= f.label :category %><br>
-		<%= f.select :category, options_for_select(Payout.categories.keys.to_a) %>
+		<%= f.collection_select :payout_category_id, PayoutCategory.all, :id, :pcategory %>
 	</p>
 
 	<p>

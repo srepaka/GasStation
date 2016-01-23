@@ -37,3 +37,12 @@ EntryCategory.create(category: "SMO Withdrawal", entry_type_id: EntryType.find_b
 EntryCategory.create(category: "State Taxes", entry_type_id: EntryType.find_by(entry_type: "Debit").id)
 EntryCategory.create(category: "Trash", entry_type_id: EntryType.find_by(entry_type: "Debit").id)
 EntryCategory.create(category: "Utilities", entry_type_id: EntryType.find_by(entry_type: "Debit").id)
+
+PayoutCategory.create(pcategory: "ATM")
+PayoutCategory.create(pcategory: "Calibration")
+PayoutCategory.create(pcategory: "D")
+PayoutCategory.create(pcategory: "Inventory")
+PayoutCategory.create(pcategory: "J")
+PayoutCategory.create(pcategory: "Maintenance")
+PayoutCategory.create(pcategory: "Office")
+PayoutCategory.create(pcategory: "Other")
