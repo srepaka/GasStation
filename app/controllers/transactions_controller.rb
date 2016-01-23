@@ -108,6 +108,15 @@ class TransactionsController < ApplicationController
 		@sum_debits = @debit_transactions.sum(:amount)
 	end
 
+	def toggle_flagged
+		@transaction = Transaction.find(params[:id])
+		@transaction.toggle!(:flagged)
+
+		respond_to do |format|
+			format.js {render inline: "location.reload();" }
+		end
+	end
+
 	private
 		def transaction_params
 			params.require(:transaction).permit(:accounting_date, :transaction_date, :description, :entry_type_id, :entry_category_id, :amount)

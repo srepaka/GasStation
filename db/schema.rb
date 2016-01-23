@@ -59,15 +59,16 @@ ActiveRecord::Schema.define(version: 20151119071829) do
   add_index "payouts", ["daily_report_id"], name: "index_payouts_on_daily_report_id", using: :btree
 
   create_table "transactions", force: :cascade do |t|
-    t.date     "accounting_date",                            null: false
-    t.date     "transaction_date",                           null: false
-    t.string   "description",                                null: false
-    t.integer  "entry_type_id",                              null: false
-    t.integer  "entry_category_id",                          null: false
+    t.date     "accounting_date",                                            null: false
+    t.date     "transaction_date",                                           null: false
+    t.string   "description",                                                null: false
+    t.integer  "entry_type_id",                                              null: false
+    t.integer  "entry_category_id",                                          null: false
     t.integer  "daily_report_id"
-    t.decimal  "amount",            precision: 10, scale: 2, null: false
-    t.datetime "created_at",                                 null: false
-    t.datetime "updated_at",                                 null: false
+    t.decimal  "amount",            precision: 10, scale: 2,                 null: false
+    t.boolean  "flagged",                                    default: false, null: false
+    t.datetime "created_at",                                                 null: false
+    t.datetime "updated_at",                                                 null: false
   end
 
   add_index "transactions", ["daily_report_id"], name: "index_transactions_on_daily_report_id", using: :btree

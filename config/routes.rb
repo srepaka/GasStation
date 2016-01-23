@@ -24,6 +24,7 @@ Rails.application.routes.draw do
 
   resources :transactions do
 	get 'report', on: :collection
+	get 'toggle_flagged', :on => :member
   end
 
   namespace :api, defaults: {format: 'json'} do
