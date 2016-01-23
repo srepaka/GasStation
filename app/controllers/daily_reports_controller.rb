@@ -56,6 +56,29 @@ class DailyReportsController < ApplicationController
 		redirect_to daily_reports_path
 	end
 
+	def payoutsreport
+		@from_date_is_null = true
+		@to_date_is_null = true
+
+		if (params[:from_date])
+			@from_date_is_null = false
+			from_date = params[:from_date]
+		else
+			from_date = 1.month.ago
+		end
+		
+		if (params[:to_date])
+			@to_date_is_null = false
+			to_date = params[:to_date]
+		else
+			to_date = Date.today
+		end
+
+		@payouts = DailyReport.FilterByDate(from_date, to_date).joins(:payouts => :payout_category).select(:amount, :pcategory) 
+		@payout_groups = @payouts.group(:pcategory).sum(:amount)
+		@payouts_sum = @payouts.sum(:amount)
+	end
+
 	private
 		def daily_report_params
 			params.require(:daily_report).permit(:date, :grocery, :fuel, :gift_cards, :credit, :debit, :cash, :commission, :actual_debit, :cash_counted, :notes)

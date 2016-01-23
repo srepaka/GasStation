@@ -16,7 +16,7 @@ function flagDifference(idCell1, idCell2)
 			{
 				if (Math.abs(getNumber(cell1.textContent) - getNumber(cell2.textContent)) >= 5)
 				{
-					bgColor = "Tomato";
+					bgColor = "LightCoral";
 				}		
 				cell1.style.backgroundColor = bgColor;
 				cell2.style.backgroundColor = bgColor;

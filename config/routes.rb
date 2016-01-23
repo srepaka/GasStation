@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   resources :daily_reports do
+	get 'payoutsreport', on: :collection
 	resources :payouts, :deposits
   end
 
