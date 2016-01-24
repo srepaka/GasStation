@@ -1,12 +1,12 @@
 class DepositsController < ApplicationController
 	def create
 		@daily_report = DailyReport.find(params[:daily_report_id])
-		#TODO: entry_type_id & entry_category_id should not come from view
 		@deposit = @daily_report.transactions.create(deposit_params)
 		redirect_to daily_report_deposits_path(@daily_report)
 	end
 
 	def index
+		@entry_category = EntryCategory.find_by(category: 'Daily Deposit')
 		@daily_report = DailyReport.find(params[:daily_report_id])
 	end
 

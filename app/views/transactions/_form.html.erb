@@ -16,12 +16,12 @@
 
 	<p>
 		<%= f.label :accounting_date %><br>
-		<%= f.date_select :accounting_date %>
+		<%= f.date_select :accounting_date, default: Date.today %>
 	</p>
 
 	<p>
 		<%= f.label :transaction_date %><br>
-		<%= f.date_select :transaction_date %>
+		<%= f.date_select :transaction_date, default: Date.today %>
 	</p>
 
 	<p>

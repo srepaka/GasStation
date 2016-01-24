@@ -19,10 +19,14 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   resources :daily_reports do
+	get 'payoutsreport', on: :collection
 	resources :payouts, :deposits
   end
 
-  resources :transactions
+  resources :transactions do
+	get 'report', on: :collection
+	get 'toggle_flagged', :on => :member
+  end
 
   namespace :api, defaults: {format: 'json'} do
 	namespace :v1 do
