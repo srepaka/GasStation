@@ -34,24 +34,27 @@
 <table id="reports_table" border="1">
 	<tr>
 		<th>Date</th>
-		<th width="5%"</th>
+		<th width="4%"</th>
 		<th>Grocery</th>
 		<th>Fuel</th>
 		<th>Gift Cards</th>
 		<th>Total</th>
-		<th width="5%"</th>
+		<th width="4%"</th>
 		<th>Credit</th>
 		<th>Debit</th>
 		<th>Cash</th>
 		<th>Total</th>
-		<th width="5%"></th>
+		<th width="4%"></th>
 		<th>Expected Debit</th>
 		<th>Actual Debit</th>
-		<th width="5%"></th>
+		<th width="4%"></th>
 		<th>Payouts</th>
 		<th>Cash Expected</th>
 		<th>Cash Counted</th>
 		<th>Difference</th>
+		<th width="4%"></th>
+		<th>Cash Deposited</th>
+		<th width="4%"></th>
 		<th>Notes</th>
 		<th colspan="4"></th>		
 	<tr>
@@ -78,6 +81,9 @@
 			<td id="id_ExpectedCash"><%= number_to_currency(dailyreport.cash - @total_payouts) %></td>
 			<td id="id_CountedCash"><%= number_to_currency(dailyreport.cash_counted) %></td>
 			<td id="id_CashDifference"><%= number_to_currency(dailyreport.cash_counted - (dailyreport.cash - @total_payouts)) %></td>
+			<td></td>
+			<td id="id_CashDeposited"><%= number_to_currency(dailyreport.transactions.joins(:entry_category).where(entry_categories: { category: 'Daily Deposit' }).sum(:amount)) %></td>
+			<td></td>
 			<td><%= dailyreport.notes %></td>
 			<td><%= link_to 'Edit', edit_daily_report_path(dailyreport) %></td>
 			<td><%= link_to 'Payouts', daily_report_payouts_path(dailyreport) %></td>

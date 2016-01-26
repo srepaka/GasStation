@@ -28,4 +28,4 @@ function flagDifference(idCell1, idCell2)
 $(document).ready(flagDifference('id_TotalSales', 'id_TotalReceipts'));
 $(document).ready(flagDifference('id_ExpectedDebit', 'id_ActualDebit'));
 $(document).ready(flagDifference('id_ExpectedCash', 'id_CountedCash'));
-
+$(document).ready(flagDifference('id_CountedCash', 'id_CashDeposited'));
