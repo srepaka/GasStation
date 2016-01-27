@@ -25,7 +25,6 @@ ActiveRecord::Schema.define(version: 20151119071829) do
     t.decimal  "debit",        precision: 7, scale: 2,                 null: false
     t.decimal  "cash",         precision: 7, scale: 2,                 null: false
     t.decimal  "commission",   precision: 7, scale: 2, default: 225.0, null: false
-    t.decimal  "actual_debit", precision: 7, scale: 2, default: 0.0,   null: false
     t.decimal  "cash_counted", precision: 7, scale: 2,                 null: false
     t.text     "notes"
     t.datetime "created_at",                                           null: false

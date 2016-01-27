@@ -1,0 +1,30 @@
+<h1>SMO Withdrawals</h1>
+
+<table>
+	<tr>
+		<th>Withdrawal Date</th>
+		<th>Description</th>
+		<th>Amount</th>
+		<th colspan="1"></th>
+	</tr>
+	
+	<% @daily_report.transactions.joins(:entry_category).where(entry_categories: {category: 'SMO Withdrawal' }).each do |smowithdrawal| %>
+		<tr>
+			<td><%= smowithdrawal.transaction_date %></td>
+			<td><%= smowithdrawal.description %></td>
+			<td><%= number_to_currency(smowithdrawal.amount) %></td>
+			<td><%= link_to 'Delete', daily_report_smowithdrawal_path(smowithdrawal.daily_report, smowithdrawal),
+				method: :delete,
+				data: { confirm: 'Are you sure?' } %></td>
+		</tr>
+	<% end %>
+</table>
+
+<h2>Add an SMO withdrawal:</h2>
+
+<% @smowithdrawal = @daily_report.transactions.build %>
+<%= render 'form' %>
+
+<p>
+		<%= link_to 'Back', daily_reports_path %>
+</p>		

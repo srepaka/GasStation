@@ -12,7 +12,6 @@ class CreateDailyReports < ActiveRecord::Migration
       t.decimal :cash, precision: 7, scale: 2, null: false
 
       t.decimal :commission, precision: 7, scale: 2, null: false, default: 225.00
-      t.decimal :actual_debit, precision: 7, scale: 2, null: false, default: 0.00
 
       t.decimal :cash_counted, precision: 7, scale: 2, null: false
 

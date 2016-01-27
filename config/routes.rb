@@ -20,7 +20,7 @@ Rails.application.routes.draw do
 
   resources :daily_reports do
 	get 'payoutsreport', on: :collection
-	resources :payouts, :deposits
+	resources :payouts, :deposits, :smowithdrawals
   end
 
   resources :transactions do

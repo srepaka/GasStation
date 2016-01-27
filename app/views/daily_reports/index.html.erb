@@ -56,7 +56,7 @@
 		<th>Cash Deposited</th>
 		<th width="4%"></th>
 		<th>Notes</th>
-		<th colspan="4"></th>		
+		<th colspan="5"></th>
 	<tr>
 
 	<% @DailyReports.each do |dailyreport| %>
@@ -75,7 +75,7 @@
 			<td id="id_TotalReceipts"><b><%= number_to_currency(dailyreport.credit + dailyreport.debit + dailyreport.cash) %></b></td>
 			<td></td>
 			<td id="id_ExpectedDebit"><%= number_to_currency((dailyreport.fuel + dailyreport.gift_cards - dailyreport.credit - dailyreport.debit) - dailyreport.commission) %></td>
-			<td id="id_ActualDebit"><%= number_to_currency(dailyreport.actual_debit) %></td>
+			<td id="id_ActualDebit"><%= number_to_currency(dailyreport.transactions.joins(:entry_category).where(entry_categories: { category: 'SMO Withdrawal' }).sum(:amount))%></td>
 			<td></td>
 			<td><%= number_to_currency(@total_payouts) %></td>
 			<td id="id_ExpectedCash"><%= number_to_currency(dailyreport.cash - @total_payouts) %></td>
@@ -88,6 +88,7 @@
 			<td><%= link_to 'Edit', edit_daily_report_path(dailyreport) %></td>
 			<td><%= link_to 'Payouts', daily_report_payouts_path(dailyreport) %></td>
 			<td><%= link_to 'Deposits', daily_report_deposits_path(dailyreport) %></td>
+			<td><%= link_to 'SMO', daily_report_smowithdrawals_path(dailyreport) %></td>
 			<td><%= link_to 'Delete', daily_report_path(dailyreport),
 				method: :delete,
 				data: { confirm: 'Are you sure?' } %></td>

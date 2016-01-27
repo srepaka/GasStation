@@ -8,7 +8,7 @@
 		<th colspan="1"></th>
 	</tr>
 	
-	<% @daily_report.transactions.each do |deposit| %>
+	<% @daily_report.transactions.joins(:entry_category).where(entry_categories: { category: 'Daily Deposit' }).each do |deposit| %>
 		<tr>
 			<td><%= deposit.transaction_date %></td>
 			<td><%= deposit.description %></td>
