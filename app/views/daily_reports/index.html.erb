@@ -51,8 +51,6 @@
 		<th>Payouts</th>
 		<th>Cash Expected</th>
 		<th>Cash Counted</th>
-		<th>Difference</th>
-		<th width="4%"></th>
 		<th>Cash Deposited</th>
 		<th width="4%"></th>
 		<th>Notes</th>
@@ -80,8 +78,6 @@
 			<td><%= number_to_currency(@total_payouts) %></td>
 			<td id="id_ExpectedCash"><%= number_to_currency(dailyreport.cash - @total_payouts) %></td>
 			<td id="id_CountedCash"><%= number_to_currency(dailyreport.cash_counted) %></td>
-			<td id="id_CashDifference"><%= number_to_currency(dailyreport.cash_counted - (dailyreport.cash - @total_payouts)) %></td>
-			<td></td>
 			<td id="id_CashDeposited"><%= number_to_currency(dailyreport.transactions.joins(:entry_category).where(entry_categories: { category: 'Daily Deposit' }).sum(:amount)) %></td>
 			<td></td>
 			<td><%= dailyreport.notes %></td>
