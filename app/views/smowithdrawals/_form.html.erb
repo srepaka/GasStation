@@ -1,12 +1,12 @@
-<%= form_for @deposit, :as => :deposit, :url => daily_report_deposits_path(@daily_report, @deposit) do |f| %>
-	<% if @deposit.errors.any? %>
+<%= form_for @smowithdrawal, :as => :smowithdrawal, :url => daily_report_smowithdrawals_path(@daily_report, @smowithdrawal) do |f| %>
+	<% if @smowithdrawal.errors.any? %>
                 <div id="error_explanation">
                         <h2>
-                                <%= pluralize(@deposit.errors.count, "error") %> prohibited this 
-                                deposit being saved:
+                                <%= pluralize(@smowithdrawal.errors.count, "error") %> prohibited this 
+                                SMO withdrawal being saved:
                         </h2>
                         <ul>
-                                <% @deposit.errors.full_messages.each do |msg| %>
+                                <% @smowithdrawal.errors.full_messages.each do |msg| %>
                                         <li><%= msg %></li>
                                 <% end %>
                         </ul>
@@ -14,13 +14,13 @@
         <% end %>
 
         <p>
-                <%= f.label "Deposit Date" %><br>
+                <%= f.label "SMO Withdrawal Date" %><br>
                 <%= f.date_select :transaction_date, default: Date.today %>
         </p>
 
         <p>
                 <%= f.label :description %><br>
-                <%= f.text_field :description, value: 'Daily Deposit' %>
+                <%= f.text_field :description, value: 'SMO Withdrawal' %>
         </p>
 
         <p>

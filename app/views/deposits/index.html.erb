@@ -5,15 +5,14 @@
 		<th>Deposit Date</th>
 		<th>Description</th>
 		<th>Amount</th>
-		<th colspan="2"></th>
+		<th colspan="1"></th>
 	</tr>
 	
-	<% @daily_report.transactions.each do |deposit| %>
+	<% @daily_report.transactions.joins(:entry_category).where(entry_categories: { category: 'Daily Deposit' }).each do |deposit| %>
 		<tr>
 			<td><%= deposit.transaction_date %></td>
 			<td><%= deposit.description %></td>
 			<td><%= number_to_currency(deposit.amount) %></td>
-			<td><%= link_to 'Edit', edit_daily_report_deposit_path(deposit.daily_report, deposit) %></td>
 			<td><%= link_to 'Delete', daily_report_deposit_path(deposit.daily_report, deposit),
 				method: :delete,
 				data: { confirm: 'Are you sure?' } %></td>
