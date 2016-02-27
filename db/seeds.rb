@@ -17,6 +17,7 @@ EntryCategory.create(category: "Correction", entry_type_id: EntryType.find_by(en
 EntryCategory.create(category: "Daily Deposit", entry_type_id: EntryType.find_by(entry_type: "Credit").id)
 EntryCategory.create(category: "Lottery Commission", entry_type_id: EntryType.find_by(entry_type: "Credit").id)
 EntryCategory.create(category: "Lottery Deposit", entry_type_id: EntryType.find_by(entry_type: "Credit").id)
+EntryCategory.create(category: "Other", entry_type_id: EntryType.find_by(entry_type: "Credit").id)
 EntryCategory.create(category: "SMO Refund", entry_type_id: EntryType.find_by(entry_type: "Credit").id)
 
 EntryCategory.create(category: "Accounting Expenses", entry_type_id: EntryType.find_by(entry_type: "Debit").id)
@@ -28,6 +29,8 @@ EntryCategory.create(category: "Insurance", entry_type_id: EntryType.find_by(ent
 EntryCategory.create(category: "Inventory", entry_type_id: EntryType.find_by(entry_type: "Debit").id)
 EntryCategory.create(category: "Lottery Withdrawal", entry_type_id: EntryType.find_by(entry_type: "Debit").id)
 EntryCategory.create(category: "Maintenance", entry_type_id: EntryType.find_by(entry_type: "Debit").id)
+EntryCategory.create(category: "Office", entry_type_id: EntryType.find_by(entry_type: "Debit").id)
+EntryCategory.create(category: "Other", entry_type_id: EntryType.find_by(entry_type: "Debit").id)
 EntryCategory.create(category: "Payroll", entry_type_id: EntryType.find_by(entry_type: "Debit").id)
 EntryCategory.create(category: "Payroll Taxes", entry_type_id: EntryType.find_by(entry_type: "Debit").id)
 EntryCategory.create(category: "Rent", entry_type_id: EntryType.find_by(entry_type: "Debit").id)
